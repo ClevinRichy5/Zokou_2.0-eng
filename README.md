@@ -1,56 +1,51 @@
-<p align="center"><h1>Zokou-2.0 </h1><br> </p>
+```markdown
+# Zokou-2.0
 
 
 
+Zokou is a multi-device bot designed to enhance your WhatsApp conversations with useful and fun features. Whether managing files, interacting with stickers, or facilitating group management, Zokou is here to assist you.
 
-![banner](Zokou.jpg)
+## Key Features
 
- Zokou est un bot multi-devices conçu pour enrichir vos conversations WhatsApp avec des fonctionnalités utiles et amusantes. Qu'il s'agisse de gérer des fichiers, d'interagir avec des stickers ou de faciliter la gestion de groupe, Zokou est là pour vous aider.
+- **File Download:** Zokou can download audio and video files from links you send, making it easy to share them with your contacts.
 
-## Fonctionnalités Principales
+- **Sticker Export:** You can export stickers from Telegram and use them in your WhatsApp conversations by simply sending them to Zokou. You need the api key from api.lolhuman.xyz; an API key is provided in case you don't have one: `9d05ccc5f58e1cf30937`
 
-- **Téléchargement de Fichiers :** Zokou peut télécharger des fichiers audio et vidéo à partir de liens que vous lui envoyez, pour que vous puissiez les partager facilement avec vos contacts.
+- **Group Management:** Zokou offers group management features, such as adding or removing members, configuring rules, and other settings.
 
-- **Exportation de Stickers :** Vous pouvez exporter des stickers de Telegram et les utiliser dans vos conversations WhatsApp en les envoyant simplement à Zokou.Vous avez donc besoins de l'api key de chez api.lolhuman.xyz ; un api  key vous est offert au cas ou vous y arrivez pas : ```9d05ccc5f58e1cf30937```
+- **Text to Img:** The best logos have been selected for your convenience.
 
-- **Gestion de Groupe :** Zokou offre des fonctionnalités de gestion de groupe, comme l'ajout ou la suppression de membres, la configuration de règles et d'autres paramètres.
+## Fun Features
 
-- **Text to img :** Les meilleurs logos on été sélectionné pour votre confort.
+- **Jokes and Riddles:** Zokou comes with a collection of jokes and riddles to liven up your conversations.
 
-## Fonctionnalités Ludiques
+- **Inspiring Quotes:** Receive inspiring quotes to motivate you daily.
 
-- **Blagues et Devinettes :** Zokou est équipé d'une collection de blagues et de devinettes pour égayer vos conversations.
+## Get Zokou
 
-- **Citations Inspirantes :** Recevez des citations inspirantes pour vous motiver au quotidien.
+1. Click on **[Fork](https://github.com/Faouz995/Zokou_2.0-eng/fork)** to copy the repo to your GitHub account. Make sure to add a star 🌟 to encourage the developers.
 
+2. Obtain a bot session: 
+   - [Session-ID](https://replit.com/@murnoire/Zuk?v=1)
+   - [Replit](https://replit.com/@murnoire/Zuk?v=1)
 
-## Obtenir Zokou
-
-1. Veillez cliquer sur **[Fork](https://github.com/djalega8000/Zokou-2.0/fork)** afin de copier le repo sur votre compte github.  veillez bien ajouter une etoile 🌟 pour encourager les développeurs 
-
-2. Obtenez une session du bot : <br>
-  [Session-ID](https://replit.com/@murnoire/Zuk?v=1) <br>
-  [Replit](https://replit.com/@murnoire/Zuk?v=1)
-3. 
-
-## Déploiement
-- **déploiement sur heroku**
-  1. si vous ne disposez pas de compte **heroku** cliquez [**ici**](https://id.heroku.com/login) pour vous en procurer un .
-  2.  cliquez [**ici**](https://dashboard.heroku.com/new?template=https://github.com/djalega8000/Zokou-2.0) pour deployer le bot sur **heroku**
+3. Deploy
+   - **Heroku Deployment:**
+     1. If you don't have a **Heroku** account, click [**here**](https://id.heroku.com/login) to create one.
+     2. Click [**here**](https://dashboard.heroku.com/new?template=https://github.com/Faouz995/Zokou_2.0-eng) to deploy the bot on **Heroku**.
 
 ## Contributions
 
-Les contributions à Zokou sont les bienvenues ! Si vous avez des idées pour de nouvelles fonctionnalités, des améliorations ou des corrections de bogues, n'hésitez pas à ouvrir une issue ou à soumettre une demande de pull 
-                
-## Licence
+Contributions to Zokou are welcome! If you have ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 
-Le Bot WhatsApp Zokou est publié sous la [Licence MIT](https://opensource.org/licenses/MIT).
+## License
 
-Profitez des fonctionnalités variées du Bot WhatsApp Zokou pour améliorer vos conversations et rendre votre expérience WhatsApp plus intéressante !
+The WhatsApp Bot Zokou is released under the [MIT License](https://opensource.org/licenses/MIT).
 
+Enjoy the diverse features of the WhatsApp Bot Zokou to enhance your conversations and make your WhatsApp experience more interesting!
 
-## Developpeur :
- 
-  [**Djalega++**](https://github.com/djalega8000/Zokou-MD/)  <br>
-  [**᚛M๏𝓷keℽ D Lบffy᚜**](https://github.com/Faouz995)
- 
+## Developers:
+
+- [**Djalega++**](https://github.com/djalega8000/Zokou-MD/)
+- [**᚛M๏𝓷keℽ D Lบffy᚜**](https://github.com/Faouz995)
+```￼Enter
