@@ -37,7 +37,7 @@ async (origineMessage, zk, commandeOptions) => {
 
 zokou({
   nomCom: "google",
-  categorie: "Recherche"
+  categorie: "Search"
 }, async (dest, zk, commandeOptions) => {
   const { arg, repondre } = commandeOptions;
   
@@ -66,7 +66,7 @@ zokou({
 
 zokou({
   nomCom: "imdb",
-  categorie: "Recherche"
+  categorie: "Search"
 }, async (dest, zk, commandeOptions) => {
   const { arg, repondre , ms } = commandeOptions;
 

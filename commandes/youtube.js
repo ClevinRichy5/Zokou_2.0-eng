@@ -9,7 +9,7 @@ const yts1 = require("youtube-yts");
 
 zokou({
   nomCom: "song",
-  categorie: "Recherche",
+  categorie: "Search",
   reaction: "💿"
 }, async (origineMessage, zk, commandeOptions) => {
   const { ms, repondre, arg } = commandeOptions;
@@ -111,7 +111,7 @@ _*En cours de téléchargement...*_\n\n`
 
 zokou({
   nomCom: "video",
-  categorie: "Recherche",
+  categorie: "Search",
   reaction: "🎥"
 }, async (origineMessage, zk, commandeOptions) => {
   const { arg, ms, repondre } = commandeOptions;

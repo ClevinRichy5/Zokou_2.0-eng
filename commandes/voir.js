@@ -3,7 +3,7 @@ const {getContentType}=require("@sampandey001/baileys")
 
 
 
-zokou({nomCom:"voir",categorie:"Général",reaction:"🤲🏿"},async(dest,zk,commandeOptions)=>{
+zokou({nomCom:"voir",categorie:"General",reaction:"🤲🏿"},async(dest,zk,commandeOptions)=>{
 
 const {ms,msgRepondu,repondre}=commandeOptions;
 

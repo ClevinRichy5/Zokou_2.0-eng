@@ -3,7 +3,7 @@ const gis = require('async-g-i-s');
 
 zokou({
   nomCom: "img",
-  categorie: "Recherche",
+  categorie: "Search",
   reaction: "📷"
 },
 async (dest, zk, commandeOptions) => {

@@ -12,7 +12,7 @@ const { uploadImageToImgur } = require('../framework/imgur');
 
 
 
-zokou({ nomCom: "tagall", categorie: "Groupe", reaction: "📣" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "tagall", categorie: 'Group', reaction: "📣" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, arg, verifGroupe, nomGroupe, infosGroupe, nomAuteurMessage, verifAdmin, superUser } = commandeOptions
 
@@ -60,7 +60,7 @@ zokou({ nomCom: "tagall", categorie: "Groupe", reaction: "📣" }, async (dest, 
 });
 
 
-zokou({ nomCom: "link", categorie: "Groupe", reaction: "🙋" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "link", categorie: 'Group', reaction: "🙋" }, async (dest, zk, commandeOptions) => {
   const { repondre, nomGroupe, nomAuteurMessage, verifGroupe } = commandeOptions;
   if (!verifGroupe) { repondre("wait bro , you want the link to my dm?"); return; };
 
@@ -76,7 +76,7 @@ Lien :${lien}`
 
 });
 /** *nommer un membre comme admin */
-zokou({ nomCom: "promote", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("For groups only"); }
@@ -138,7 +138,7 @@ zokou({ nomCom: "promote", categorie: "Groupe", reaction: "👨🏿‍💼" }, a
 //fin nommer
 /** ***demettre */
 
-zokou({ nomCom: "demote", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("For groups only"); }
@@ -204,7 +204,7 @@ zokou({ nomCom: "demote", categorie: "Groupe", reaction: "👨🏿‍💼" }, as
 
 /** ***fin démettre****  **/
 /** **retirer** */
-zokou({ nomCom: "remove", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
   if (!verifGroupe) { return repondre("for groups only"); }
@@ -280,7 +280,7 @@ zokou({ nomCom: "remove", categorie: "Groupe", reaction: "👨🏿‍💼" }, as
 /** *****fin retirer */
 
 
-zokou({ nomCom: "del", categorie: "Groupe",reaction:"🧹" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe,auteurMsgRepondu,idBot, msgRepondu, verifAdmin, superUser, auteurMessage ,verifZokouAdmin} = commandeOptions;
   
@@ -335,7 +335,7 @@ zokou({ nomCom: "del", categorie: "Groupe",reaction:"🧹" }, async (dest, zk, c
           }
 });
 
-zokou({ nomCom: "info", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, verifGroupe, verifZokouAdmin } = commandeOptions;
   if (!verifGroupe) { repondre("order reserved for the group only"); return };
 
@@ -359,7 +359,7 @@ zokou({ nomCom: "info", categorie: "Groupe" }, async (dest, zk, commandeOptions)
 
  //------------------------------------antilien-------------------------------
 
- zokou({ nomCom: "antilink", categorie: "Groupe", reaction: "🔗" }, async (dest, zk, commandeOptions) => {
+ zokou({ nomCom: "antilink", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
   var { ms, repondre, arg, verifGroupe, auteurMessage, superUser, verifZokouAdmin, verifAdmin,prefixe, dev } = commandeOptions;
@@ -418,7 +418,7 @@ zokou({ nomCom: "info", categorie: "Groupe" }, async (dest, zk, commandeOptions)
 
  //------------------------------------antibot-------------------------------
 
- zokou({ nomCom: "antibot", categorie: "Groupe", reaction: "🔗" }, async (dest, zk, commandeOptions) => {
+ zokou({ nomCom: "antibot", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
   var { ms, repondre, arg, verifGroupe, auteurMessage, superUser, verifZokouAdmin, verifAdmin,prefixe, dev } = commandeOptions;
@@ -474,7 +474,7 @@ zokou({ nomCom: "info", categorie: "Groupe" }, async (dest, zk, commandeOptions)
 
 //----------------------------------------------------------------------------
 
-zokou({ nomCom: "group", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "group", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage, arg } = commandeOptions;
 
@@ -511,7 +511,7 @@ zokou({ nomCom: "left", categorie: "Mods" }, async (dest, zk, commandeOptions) =
   await zk.groupLeave(dest)
 });
 
-zokou({ nomCom: "gname", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gname", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
@@ -530,7 +530,7 @@ zokou({ nomCom: "gname", categorie: "Groupe" }, async (dest, zk, commandeOptions
  
 }) ;
 
-zokou({ nomCom: "gdesc", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gdesc", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
@@ -550,7 +550,7 @@ zokou({ nomCom: "gdesc", categorie: "Groupe" }, async (dest, zk, commandeOptions
 }) ;
 
 
-zokou({ nomCom: "gpp", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gpp", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
@@ -575,7 +575,7 @@ zokou({ nomCom: "gpp", categorie: "Groupe" }, async (dest, zk, commandeOptions) 
 });
 
 /////////////
-zokou({nomCom:"hidetag",categorie:"Groupe",reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+zokou({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
 
 
 const {ms,repondre,msgRepondu,verifGroupe,prefixe,arg}=commandeOptions;

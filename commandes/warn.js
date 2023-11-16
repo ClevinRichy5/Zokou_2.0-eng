@@ -6,7 +6,7 @@ const s = require("../set")
 zokou(
     {
         nomCom : 'warn',
-        categorie : 'Groupe'
+        categorie : 'Group'
         
     },async (dest,zk,commandeOptions) => {
 
