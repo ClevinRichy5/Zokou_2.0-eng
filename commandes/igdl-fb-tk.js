@@ -5,7 +5,7 @@ const { fetchVideo } = require('@prevter/tiktok-scraper');
 const mumaker = require("mumaker");
 const getFBInfo = require("@xaviabot/fb-downloader");
 
-zokou({nomCom : "igdl" , categorie : "Téléchargement"},async (dest , zk , commandeOptions)=>{
+zokou({nomCom : "igdl" , categorie : "Download"},async (dest , zk , commandeOptions)=>{
   const {ms,repondre,arg} = commandeOptions ;
 
   let link = arg.join(' ')
@@ -28,7 +28,7 @@ zokou({nomCom : "igdl" , categorie : "Téléchargement"},async (dest , zk , comm
 
 zokou({
   nomCom: "fbdl",
-  categorie: "Téléchargement",
+  categorie: "Download",
   reaction: "📽️"
 },
 async (dest, zk, commandeOptions) => {
@@ -65,7 +65,7 @@ async (dest, zk, commandeOptions) => {
 
 
 
-zokou({ nomCom: "tiktok", categorie: "Téléchargement", reaction: "🎵" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "tiktok", categorie: "Download", reaction: "🎵" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
     repondre(`Voici comment utiliser la commande:\n ${prefixe}veiller lien_video_tiktok`);
@@ -111,7 +111,7 @@ zokou({ nomCom: "tiktok", categorie: "Téléchargement", reaction: "🎵" }, asy
 
 zokou({
   nomCom: "fbdl2",
-  categorie: "Téléchargement",
+  categorie: "Download",
   reaction: "📽️"
 },
 async (dest, zk, commandeOptions) => {

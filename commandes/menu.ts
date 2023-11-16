@@ -10,7 +10,7 @@ const s =require(__dirname+"/../set")
 
 
 
-zokou({nomCom:"menu",categorie:"Général"},async(dest,zk,commandeOptions)=>{
+zokou({nomCom:"menu",categorie:"General"},async(dest,zk,commandeOptions)=>{
 let {ms,repondre}=commandeOptions;
 let {cm}=require(__dirname+"/../framework//zokou")
   var coms={}
@@ -20,7 +20,7 @@ let {cm}=require(__dirname+"/../framework//zokou")
     mode="privé"
   }
 
-  var emoji={"Général":"🌐","Logo":"🎨","Hentai":"🔥","Weeb":"🌸","Recherche":"🔍","Conversion":"🌟","Groupe":"♻️","Autre":"🪖"}
+  var emoji={"General":"🌐","Logo":"🎨","Hentai":"🔥","Weeb":"🌸","Recherche":"🔍","Conversion":"🌟","Groupe":"♻️","Autre":"🪖"}
 cm.map(async(com,index)=>{if(!coms[com.categorie])coms[com.categorie]=[]; coms[com.categorie].push(com.nomCom)})
               
   const temps=moment(moment()).format("HH:MM:SS")
@@ -154,7 +154,7 @@ module.exports.commande =()=>
   {
     var nomCom=["menu","m","fonctions"];
     var reaction="🐞"
-    var categorie="général"
+    var categorie="General"
 
 
     return {nomCom,reaction,categorie,execute}
@@ -203,7 +203,7 @@ var tt=[]
       //console.log(fichier+" installé ✅")
       // var { commande } = require(/**///'../'+chemin.replace(/./, '')+*/__dirname+'/'+fichier.split('.js')[0])
      //  var infoCom = commande()
-     //  if(!infoCom.categorie) infoCom.categorie="général"
+     //  if(!infoCom.categorie) infoCom.categorie="General"
      // tabCat[infoCom.categorie].push(infoCom.nomCom[0])
      //  tabCmd[infoCom.nomCom[0]]
    /*  for(a of infoCom.categorie)
@@ -259,7 +259,7 @@ var tt=[]
       (async (cmds)=>
         {
           if(!coms[cmds.categerie])
-    coms[cmds.categorie]="général"
+    coms[cmds.categorie]="General"
     coms[cmds.categorie].push(cmds)
           
         }

@@ -4,7 +4,7 @@ const {zokou} = require("../framework/zokou");
 
 zokou({
   nomCom: "stickersearch",
-  categorie: "Recherche",
+  categorie: 'Search',
   reaction: "🍁"
 },
 async (dest, zk, commandeOptions) => {

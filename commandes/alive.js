@@ -6,7 +6,7 @@ const s = require(__dirname + "/../set");
 zokou(
     {
         nomCom : 'alive',
-        categorie : 'Général'
+        categorie : 'General'
         
     },async (dest,zk,commandeOptions) => {
 

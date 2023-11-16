@@ -6,7 +6,7 @@ const {uploadImageToImgur} = require("../framework/imgur")
 function createCanvacordCommand(commandName, canvacordFunction) {
   zokou({
     nomCom: commandName,
-    categorie: "Editeur d'image",
+    categorie: "Image-Edit",
     reaction: "🎉"
   }, async (origineMessage, zk, commandeOptions) => {
     const { ms, msgRepondu, auteurMsgRepondu } = commandeOptions;
