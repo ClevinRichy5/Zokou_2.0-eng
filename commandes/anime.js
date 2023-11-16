@@ -42,7 +42,7 @@ zokou({
   const { arg, repondre } = commandeOptions;
   
   if (!arg[0] || arg === "") {
-    repondre("Give me a query.\n*Example: .google Who is Suhail Tech.*");
+    repondre("Give me a query.\n*Example: .google What is a bot.*");
     return;
   }
 
@@ -52,9 +52,9 @@ zokou({
     let msg = `Google search for : ${arg}\n\n`;
 
     for (let result of results) {
-      msg += `➣ Titre : ${result.title}\n`;
+      msg += `➣ Title : ${result.title}\n`;
       msg += `➣ Description : ${result.snippet}\n`;
-      msg += `➣ Lien : ${result.link}\n\n────────────────────────\n\n`;
+      msg += `➣ Link : ${result.link}\n\n────────────────────────\n\n`;
     }
     
    // const trdmsg = await traduire(msg,{to : 'fr'})
@@ -130,7 +130,7 @@ zokou({
   const emojis = arg.join(' ').split(';');
 
   if (emojis.length !== 2) {
-    repondre("Please specify two emojis using a semicolon as a separator.");
+    repondre("Please specify two emojis using a ';' as a separator.");
     return;
   }
 

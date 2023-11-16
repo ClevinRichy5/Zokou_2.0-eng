@@ -11,7 +11,7 @@ async (dest, zk, commandeOptions) => {
   const { repondre, ms, arg, nomAuteurMessage } = commandeOptions;
 
   if (!arg[0]) {
-    repondre("Veuillez fournir un terme de recherche !");
+    repondre("where is the request ? !");
     return;
   }
 

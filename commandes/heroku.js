@@ -10,8 +10,8 @@ zokou(
 
        const {ms,repondre,superUser , arg} = commandeOptions ;
        
-       if(!superUser){repondre('Commande reserver au proprietaire du bot');return};
-       if(!arg[0] || !(arg.join('').split('='))) {repondre('Mauvais formats ; voici le mode d\'emploie.\nSetvar NOM_OWNER=Fredora');return};
+       if(!superUser){repondre('only Mods can use this commande');return};
+       if(!arg[0] || !(arg.join('').split('='))) {repondre('Bad format ; Exemple of using :\nSetvar NOM_OWNER=Fredora');return};
      
     const text = arg.join(" ")
      const Heroku = require("heroku-client");
@@ -26,7 +26,7 @@ zokou(
                   [text.split('=')[0]]: text.split('=')[1],
           },
         });
-        await repondre('variable actualiser , redemarrage en cours....')
+        await repondre('Heroku var changes , rebootings....')
     }
 );
 
@@ -38,7 +38,7 @@ zokou(
 
        const {ms,repondre,superUser , arg} = commandeOptions ;
        
-       if(!superUser){repondre('Commande reserver au proprietaire du bot');return}; 
+       if(!superUser){repondre('only mods can use this commande');return}; 
       
             const Heroku = require("heroku-client");
 
@@ -48,7 +48,7 @@ zokou(
 			let baseURI = "/apps/" + s.HEROKU_APP_NAME;
 
             let h = await heroku.get(baseURI+'/config-vars')
-let str = '*liste des variables  Heroku *\n\n'
+let str = '*Heroku Vars list *\n\n'
 for (vr in h) {
 str+= '🍁 *'+vr+'* '+'= '+h[vr]+'\n'
 }
@@ -68,8 +68,8 @@ str+= '🍁 *'+vr+'* '+'= '+h[vr]+'\n'
     
            const {ms,repondre,superUser , arg} = commandeOptions ;
            
-           if(!superUser){repondre('Commande reserver au proprietaire du bot');return}; 
-           if(!arg[0]) {repondre('Inserez le nom de la variabke en grand Charactere'); return} ;
+           if(!superUser){repondre('Only Mods can use this command');return}; 
+           if(!arg[0]) {repondre('insert the variable name in capital letter'); return} ;
       
            try {
             const Heroku = require("heroku-client");
@@ -83,7 +83,7 @@ str+= '🍁 *'+vr+'* '+'= '+h[vr]+'\n'
         if( arg.join(' ') ===vr ) return  repondre( vr+'= '+h[vr]) 	;
         } 
         
-        } catch(e) {repondre('Erreur lors de la procedure ' + e)}
+        } catch(e) {repondre('Error' + e)}
    
         });
 

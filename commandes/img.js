@@ -10,7 +10,7 @@ async (dest, zk, commandeOptions) => {
   const { repondre, ms, arg } = commandeOptions;
 
   if (!arg[0]) {
-    repondre('Veuillez fournir un terme de recherche pour les images !');
+    repondre('Wich picture do you want !');
     return;
   }
 

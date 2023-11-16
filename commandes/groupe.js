@@ -373,9 +373,9 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
   if( superUser || verifAdmin) {
     const enetatoui = await verifierEtatJid(dest)
     try {
-      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command "yes" or "no" To modify the action of the antilink, type after the command action/"your-action " ; the different actions are delete; warn and remove') ; return};
+      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command *on* or *off* To modify the action of the antilink, type after the command action/"your-action " ; the different actions are delete; warn and remove') ; return};
      
-      if(arg[0] === 'oui') {
+      if(arg[0] === 'on') {
 
       
        if(enetatoui ) { repondre("the antilink is already activated for this group")
@@ -384,7 +384,7 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
                 
               repondre("the antilink is activated successfully") }
      
-            } else if (arg[0] === "non") {
+            } else if (arg[0] === "off") {
 
               if (enetatoui) { 
                 await ajouterOuMettreAJourJid(dest , "non");
@@ -395,13 +395,14 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
                 repondre("antilink is not activated for this group");
               }
             } else if (arg.join('').split("/")[0] === 'action') {
+                            
 
                await mettreAJourAction(dest,arg.join('').split("/")[1]);
 
                repondre(`the action of the antilink has been updated on ${arg.join('').split("/")[1]}`);
             
 
-            } else repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command "yes" or "no" To modify the action of the antilink, type after the command action/"your-action " ; the different actions are delete; warn and remove')
+            } else repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command "on" or "off" To modify the action of the antilink, type after the command action/"your-action " ; the different actions are *delete* , *warn* and *remove*')
 
       
     } catch (error) {
@@ -432,9 +433,9 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
   if( superUser || verifAdmin) {
     const enetatoui = await atbverifierEtatJid(dest)
     try {
-      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how the zokou antibot works:\nTo activate the antibot, add "yes" or "no" after the command;\nTo modify the action of the antibot, type after the command action/"your-action" ; the different actions are deleted; warn and remove') ; return};
+      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how the zokou antibot works:\nTo activate the antibot, add *on* or *off* after the command;\nTo modify the action of the antibot, type after the command action/"your-action" ; the different actions are deleted; warn and remove') ; return};
      
-      if(arg[0] === 'oui') {
+      if(arg[0] === 'on') {
 
       
        if(enetatoui ) { repondre("the antibot is already activated for this group")
@@ -443,7 +444,7 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
                 
               repondre("the antibot is successfully activated") }
      
-            } else if (arg[0] === "non") {
+            } else if (arg[0] === "off") {
 
               if (enetatoui) { 
                 await atbajouterOuMettreAJourJid(dest , "non");
@@ -479,23 +480,28 @@ zokou({ nomCom: "group", categorie: 'Group' }, async (dest, zk, commandeOptions)
   const { ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage, arg } = commandeOptions;
 
   if (!verifGroupe) { repondre("order reserved for group only"); return };
-  if (!superUser || !verifAdmin) {
+  if (superUser || verifAdmin) {
+
+    if (!arg[0]) { repondre('Instructions:\n\nType group open or close'); return; }
+    const option = arg.join(' ')
+    switch (option) {
+      case "open":
+        await zk.groupSettingUpdate(dest, 'not_announcement')
+        repondre('group open')
+        break;
+      case "close":
+        await zk.groupSettingUpdate(dest, 'announcement');
+        repondre('Group close successfully');
+        break;
+      default: repondre("Please don't invent an option")
+    }
+
+    
+  } else {
     repondre("order reserved for the administratorr");
     return;
   }
-  if (!arg[0]) { repondre('Instructions:\n\nType group open or close'); return; }
-  const option = arg.join(' ')
-  switch (option) {
-    case "open":
-      await zk.groupSettingUpdate(dest, 'not_announcement')
-      repondre('group open')
-      break;
-    case "close":
-      await zk.groupSettingUpdate(dest, 'announcement');
-      repondre('Group close successfully');
-      break;
-    default: repondre("Please don't invent an option")
-  }
+ 
 
 });
 
@@ -507,8 +513,9 @@ zokou({ nomCom: "left", categorie: "Mods" }, async (dest, zk, commandeOptions) =
     repondre("command reserved for the bot owner");
     return;
   }
-   repondre('sayonnara') ;
-  await zk.groupLeave(dest)
+  await repondre('sayonnara') ;
+   
+  zk.groupLeave(dest)
 });
 
 zokou({ nomCom: "gname", categorie: 'Group' }, async (dest, zk, commandeOptions) => {

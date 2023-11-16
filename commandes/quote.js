@@ -1,7 +1,6 @@
 const { zokou } = require('../framework/zokou');
-const traduire = require('../framework/traduction');
 
-zokou({ nomCom: 'citation', categorie: 'Fun' }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: 'quote', categorie: 'Fun' }, async (dest, zk, commandeOptions) => {
   const { ms, repondre, verifGroupe, arg } = commandeOptions;
   if (!verifGroupe) {
     repondre('Commande réservée au groupe uniquement');
@@ -18,10 +17,10 @@ zokou({ nomCom: 'citation', categorie: 'Fun' }, async (dest, zk, commandeOptions
 ╚══════════════════════════╝
 
 🎬 Anime: ${quote.anime}
-👤 Personnage: ${quote.character}
-💬 Citation: ${await traduire(quote.quote, { to: 'fr' })}
+👤 Character: ${quote.character}
+💬 Quote: ${quote.quote}
 
-Propulsé par Zokou-MD`);
+Powered by Zokou-MD`);
         });
     } catch (e) {
       repondre('Erreur lors de la génération de la citation : ' + e.message);
@@ -38,10 +37,10 @@ Propulsé par Zokou-MD`);
 ╚══════════════════════════╝
 
 🎬 Anime: ${quote.anime}
-👤 Personnage: ${quote.character}
-💬 Citation: ${await traduire(quote.quote, { to: 'fr' })}
+👤 Character: ${quote.character}
+💬 Quote: ${quote.quote}
 
-Propulsé par Zokou-MD`);
+Powered by Zokou-MD`);
         });
     } catch (e) {
       repondre('Erreur lors de la génération de la citation : ' + e.message);

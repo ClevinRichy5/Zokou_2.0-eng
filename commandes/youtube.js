@@ -15,7 +15,7 @@ zokou({
   const { ms, repondre, arg } = commandeOptions;
      
   if (!arg[0]) {
-    repondre("Veuillez entrer un terme de recherche s'il vous plaît.");
+    repondre("wich song do you want.");
     return;
   }
 
@@ -29,48 +29,20 @@ zokou({
           
        let infoMess = {
           image: {url : videos[0]. thumbnail},
-         caption : `\n*nom de l'audio :* _${videos[0].title}_
+         caption : `\n*song name :* _${videos[0].title}_
 
-*Durée :* _${videos[0].timestamp}_
+*Time :* _${videos[0].timestamp}_
 
-*Lien :* _${videos[0].url}_
+*Url :* _${videos[0].url}_
 
 
-_*En cours de téléchargement...*_\n\n`
+_*on downloading...*_\n\n`
        }
 
       
 
       
 
-      
-
-      
-
-      
-//
-
-    /*  let buffer = Buffer.from([]);
-    for await (const elm of media) {
-      buffer = Buffer.concat([buffer, elm]);
-    }*/
-
-//
-
-
-// console.log("le son "+urlElement)
-
-/* yt.mp3(urlElement).then((fichier)=>{
-   const entFic=fichier.path;
-   const sortFic=entFic+".opus";
-   ffmpeg.format("opus") .on("error", (err) => {
-              console.error( err);
-            }).on('end',async()=>{
-
-                     zk.sendMessage(origineMessage, { audio: { url:fs.readFileSync(sortFic)/*"./audio.mp3"*//*},mimetype:'audio/mp4' }, { quoted: ms,ptt: true }) ;
-            }).save(sortFic)
- })*/
-     // console.log("le son "+urlElement)*/
       
        zk.sendMessage(origineMessage,infoMess,{quoted:ms}) ;
       // Obtenir le flux audio de la vidéo
@@ -117,7 +89,7 @@ zokou({
   const { arg, ms, repondre } = commandeOptions;
 
   if (!arg[0]) {
-    repondre("Veillez entrer un terme de recherche s'il vous plaît");
+    repondre("insert video name");
     return;
   }
 
@@ -131,10 +103,10 @@ zokou({
 
       let InfoMess = {
         image: { url: videos[0].thumbnail },
-        caption: `*nom de la vidéo :* _${Element.title}_
-*Durée :* _${Element.timestamp}_
-*Lien :* _${Element.url}_
-_*En cours de téléchargement...*_\n\n`
+        caption: `*Video name :* _${Element.title}_
+*Time :* _${Element.timestamp}_
+*Url :* _${Element.url}_
+_*On downloading...*_\n\n`
       };
 
       zk.sendMessage(origineMessage, InfoMess, { quoted: ms });
@@ -163,7 +135,7 @@ _*En cours de téléchargement...*_\n\n`
         repondre('Une erreur est survenue lors de l\'écriture du fichier vidéo.');
       });
     } else {
-      repondre('Aucune vidéo trouvée.');
+      repondre('No video found');
     }
   } catch (error) {
     console.error('Erreur lors de la recherche ou du téléchargement de la vidéo :', error);

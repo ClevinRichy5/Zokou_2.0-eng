@@ -9,7 +9,7 @@ zokou( {
       async(dest,zk, commandeOptions)=> {
  
 const {ms,arg,repondre} = commandeOptions;
-      if (!arg[0]) {repondre("Veiller entrer le mots ou la phrase svp");return} ;
+      if (!arg[0]) {repondre("Insert a word");return} ;
  const mots = arg.join(" ")
 
 const url = googleTTS.getAudioUrl( mots, {
@@ -32,7 +32,7 @@ zokou( {
       async(dest,zk, commandeOptions)=> {
  
 const {ms,arg,repondre} = commandeOptions;
-      if (!arg[0]) {repondre("Veiller entrer le mots ou la phrase svp");return} ;
+      if (!arg[0]) {repondre("Insert a word");return} ;
  const mots = arg.join(" ")
 
 const url = googleTTS.getAudioUrl( mots, {
@@ -55,7 +55,7 @@ zokou( {
       async(dest,zk, commandeOptions)=> {
  
 const {ms,arg,repondre} = commandeOptions;
-      if (!arg[0]) {repondre("Veiller entrer le mots ou la phrase svp");return} ;
+      if (!arg[0]) {repondre("Insert a word");return} ;
  const mots = arg.join(" ")
 
 const url = googleTTS.getAudioUrl( mots, {

@@ -26,7 +26,7 @@ zokou( {
 
            mess = {
             image : { url : ppUrl },
-            caption : '*Nom :* '+ nom + '\n*Actu :*\n' + status.status
+            caption : '*Nom :* '+ nom + '\n*Status :*\n' + status.status
         }
           
         } else {
@@ -38,7 +38,7 @@ zokou( {
 
              mess = {
               image : { url : ppUrl },
-              caption : '*Nom :* '+ nom + '\n*Actu :*\n' + status.status,
+              caption : '*Name :* '+ nom + '\n*Status :*\n' + status.status,
                mentions:[auteurMsgRepondu]
           }
             

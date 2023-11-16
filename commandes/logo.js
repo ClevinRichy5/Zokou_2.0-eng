@@ -14,7 +14,7 @@ zokou({ nomCom: "hacker",
        // let res = Object.values(anu)[3];
         // console.log("&€"+res);
       //  let lien = "https://e1.yotools.net" + res;
-        repondre("*  traitement en cour ... *");
+        repondre("* processing...*");
         await zk.sendMessage(origineMessage, { image: { url:anu.image}, caption: "* \t Logo by Zokou-Md*" }, { quoted: ms });
     }
     catch (e) {
@@ -101,7 +101,7 @@ zokou({ nomCom: "didong", categorie: "Logo", reaction: "📱" }, async (dest, zk
         var maker =await mumaker.ephoto(lien,arg.join(' '));
     
         
-     repondre(' Traitement en cours ...')
+     repondre('*processing...*')
        await zk.sendMessage(dest, { image: { url: maker.image}, caption: titre });
     }
     catch (e) {
@@ -114,11 +114,11 @@ zokou({ nomCom: "didong", categorie: "Logo", reaction: "📱" }, async (dest, zk
 zokou({nomCom : "wall",categorie : "Logo",reaction : "👍"} , async (dest,zk,commandeOptions) =>{
 
   const {arg,repondre,ms,prefixe} = commandeOptions;
-  if(!arg[0]) { repondre( `Voici comment utiliser la commande:\n ${prefixe}wall Zokou-MD` ); return ;}
+  if(!arg[0]) { repondre( `Exemple of using commande:\n ${prefixe}wall Zokou-MD` ); return ;}
    let text = arg.join(" ")
    mumaker.textpro("https://textpro.me/break-wall-text-effect-871.html", text)
 .then((data) =>{
- zk.sendMessage(dest,{image : { url : data.image},caption : 'Logo fait par Zokou-Md'},{quoted:ms})
+ zk.sendMessage(dest,{image : { url : data.image},caption : 'Logo by'},{quoted:ms})
 }) 
 .catch(console.log)
 })
@@ -126,14 +126,14 @@ zokou({nomCom : "wall",categorie : "Logo",reaction : "👍"} , async (dest,zk,co
 zokou({nomCom: "summer", categorie: "Logo", reaction: "🌞"}, async (dest, zk, commandeOptions) => {
   const { arg, repondre, ms, prefixe } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}summer Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}summer My text`);
     return;
   }
   
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-sunset-light-text-effects-online-for-free-1124.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch(console.error);
 });
@@ -141,12 +141,12 @@ zokou({nomCom: "summer", categorie: "Logo", reaction: "🌞"}, async (dest, zk, 
 zokou({nomCom: "neonlight", categorie: "Logo", reaction: "💡"}, async (dest, zk, commandeOptions) => {
   const { arg, repondre, ms, prefixe } = commandeOptions;
   /*if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}neonlight Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}neonlight My text`);
     return;
   }*/
   if(!arg ||arg=="")
   {
-      repondre(`Voici comment utiliser la commande:\n ${prefixe}neonlight Mon_Texte`);
+      repondre(`Exemple of using commande:\n ${prefixe}neonlight My text`);
     return;
   }
   
@@ -156,7 +156,7 @@ zokou({nomCom: "neonlight", categorie: "Logo", reaction: "💡"}, async (dest, z
     let maker=await mumaker.textpro("https://textpro.me/create-glowing-neon-light-text-effect-online-free-1061.html",arg)
     //repondre(stringify(maker))
     /*.then((data) => {*/
-     zk.sendMessage(dest, { image: { url: maker.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+     zk.sendMessage(dest, { image: { url: maker.image }, caption: 'Logo by' }, { quoted: ms });
     
     /*.catch(console.error);*/
 
@@ -168,14 +168,14 @@ zokou({nomCom: "neonlight", categorie: "Logo", reaction: "💡"}, async (dest, z
 zokou({nomCom: "greenneon", categorie: "Logo", reaction: "🟢"}, async (dest, zk, commandeOptions) => {
   const { arg, repondre, ms, prefixe } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}greenneon Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}greenneon My text`);
     return;
   }
   
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/green-neon-text-effect-874.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch(console.error);
 });
@@ -183,14 +183,14 @@ zokou({nomCom: "greenneon", categorie: "Logo", reaction: "🟢"}, async (dest, z
 zokou({nomCom: "glitch", categorie: "Logo", reaction: "🎛️"}, async (dest, zk, commandeOptions) => {
   const { arg, repondre, ms, prefixe } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}glitch Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}glitch My text`);
     return;
   }
   
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-impressive-glitch-text-effects-online-1027.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch(console.error);
 });
@@ -198,14 +198,14 @@ zokou({nomCom: "glitch", categorie: "Logo", reaction: "🎛️"}, async (dest, z
 zokou({nomCom: "devil", categorie: "Logo", reaction: "😈"}, async (dest, zk, commandeOptions) => {
   const { arg, repondre, ms, prefixe } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}devil Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}devil My text`);
     return;
   }
   
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html",arg)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch(console.error);
 });
@@ -241,7 +241,7 @@ var lien="https://en.ephoto360.com/boom-text-comic-style-text-effect-675.html";
        // let lien = "https://e1.yotools.net" + res;
          
 
-repondre("  Traitement en cour ...")
+repondre("  processing ...")
          await zk.sendMessage(dest,{image:{url:img.image},caption:"\t *Logo by Zokou-Md*"})
          
         // await zk.sendMessage(dest,{image:{url:lienImage},caption:"\t *Logo by Zokou-Md*"})
@@ -265,7 +265,7 @@ var {ms,repondre,arg,prefixe}=commandeOptions;
   try{
     var lien ="https://en.ephoto360.com/create-water-effect-text-online-295.html";
     var img =await mumaker.ephoto(lien,arg);
-    repondre(" traitement en cour ...")
+    repondre(" processing ...")
     await zk.sendMessage(dest,{image:{url:img.image},caption:"  *Logo by Zokou-Md*"})
   }catch(e){repondre(`🥵🥵 ${e}`)}
 
@@ -274,14 +274,14 @@ var {ms,repondre,arg,prefixe}=commandeOptions;
 zokou({ nomCom: "snow", categorie: "Logo", reaction: "❄️" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}Snow Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}Snow My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-beautiful-3d-snow-text-effect-online-1101.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -291,14 +291,14 @@ zokou({ nomCom: "snow", categorie: "Logo", reaction: "❄️" }, async (dest, zk
 zokou({ nomCom: "transformer", categorie: "Logo", reaction: "🤖" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}Transformer Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}Transformer My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-a-transformer-text-effect-online-1035.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -308,14 +308,14 @@ zokou({ nomCom: "transformer", categorie: "Logo", reaction: "🤖" }, async (des
 zokou({ nomCom: "thunder", categorie: "Logo", reaction: "⚡" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}Thunder Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}Thunder My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/online-thunder-text-effect-generator-1031.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -325,14 +325,14 @@ zokou({ nomCom: "thunder", categorie: "Logo", reaction: "⚡" }, async (dest, zk
 zokou({ nomCom: "harrypotter", categorie: "Logo", reaction: "🧙‍♂️" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}HarryPotter Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}HarryPotter My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-harry-potter-text-effect-online-1025.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -342,14 +342,14 @@ zokou({ nomCom: "harrypotter", categorie: "Logo", reaction: "🧙‍♂️" }, a
 zokou({ nomCom: "cat", categorie: "Logo", reaction: "🪟" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}FoggyWindow Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}FoggyWindow My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/write-text-on-foggy-window-online-free-1015.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -361,14 +361,14 @@ zokou({ nomCom: "cat", categorie: "Logo", reaction: "🪟" }, async (dest, zk, c
 zokou({ nomCom: "whitegold", categorie: "Logo", reaction: "💫" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}WhiteGold Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}WhiteGold My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/elegant-white-gold-3d-text-effect-online-free-1070.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -378,14 +378,14 @@ zokou({ nomCom: "whitegold", categorie: "Logo", reaction: "💫" }, async (dest,
 zokou({ nomCom: "lightglow", categorie: "Logo", reaction: "🌟" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}LightGlow Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}LightGlow My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-light-glow-sliced-text-effect-online-1068.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -395,14 +395,14 @@ zokou({ nomCom: "lightglow", categorie: "Logo", reaction: "🌟" }, async (dest,
 zokou({ nomCom: "thor", categorie: "Logo", reaction: "🔨" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}Thor Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}Thor My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/create-thor-logo-style-text-effect-online-1064.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -412,14 +412,14 @@ zokou({ nomCom: "thor", categorie: "Logo", reaction: "🔨" }, async (dest, zk, 
 zokou({ nomCom: "neon", categorie: "Logo", reaction: "💡" }, async (dest, zk, commandeOptions) => {
   const { arg, ms, prefixe,repondre } = commandeOptions;
   if (!arg[0]) {
-    repondre(`Voici comment utiliser la commande:\n ${prefixe}Neon Mon_Texte`);
+    repondre(`Exemple of using commande:\n ${prefixe}Neon My text`);
     return;
   }
 
   const text = arg.join(" ");
   mumaker.textpro("https://textpro.me/neon-text-effect-online-879.html", text)
     .then((data) => {
-      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo fait par Zokou-Md' }, { quoted: ms });
+      zk.sendMessage(dest, { image: { url: data.image }, caption: 'Logo by' }, { quoted: ms });
     })
     .catch((err) => {
       console.error("Une erreur s'est produite :", err);
@@ -437,7 +437,7 @@ zokou({nomCom:"purple",categorie:"Logo",reaction:"🧳"},async(dest,zk,commandeO
     repondre(prefixe+"purple zokou");return;}
       const lien="https://en.ephoto360.com/purple-text-effect-online-100.html"
       var img = await mumaker.ephoto(lien,arg);
-      repondre(" Traitement en cour ...")
+      repondre(" processing ...")
       await zk.sendMessage(dest,{image:{url:img.image},caption:"      *Logo by Zokou-MD*"});
     }catch(e){repondre(e)}
   
@@ -456,7 +456,7 @@ zokou({nomCom:"gold",categorie:"Logo",reaction:"🧚🏿‍♀️"},async(dest,z
     var lien="https://en.ephoto360.com/modern-gold-4-213.html";
 
     var img = await mumaker.ephoto(lien,arg);
-   repondre("Traitement en cour ...")
+   repondre("processing ...")
     await zk.sendMessage(dest,{image:{url:img.image},caption:" *Logo by Zokou-Md*"},{quoted:ms})
   }catch(e){repondre(e)}
 })
@@ -475,7 +475,7 @@ zokou({nomCom:"arena",categorie:"Logo",reaction:"🥵"},async(dest,zk,commandeOp
     var lien="https://en.ephoto360.com/create-cover-arena-of-valor-by-mastering-360.html";
 
     var img = await mumaker.ephoto(lien,arg.join(' '));
-   repondre("Traitement en cour ...")
+   repondre("processing ...")
     await zk.sendMessage(dest,{image:{url:img.image},caption:" *Logo by Zokou-Md*"},{quoted:ms})
   }catch(e){repondre(e)}
 })
@@ -493,7 +493,7 @@ zokou({nomCom:"incandescent",categorie:"Logo",reaction:"😋"},async(dest,zk,com
     var lien="https://en.ephoto360.com/text-effects-incandescent-bulbs-219.html";
 
     var img = await mumaker.ephoto(lien,arg.join(' '));
-   repondre("Traitement en cour ...")
+   repondre("processing ...")
     await zk.sendMessage(dest,{image:{url:img.image},caption:" *Logo by Zokou-Md*"},{quoted:ms})
   }catch(e){repondre(e)}
 })

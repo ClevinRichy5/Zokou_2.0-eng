@@ -130,12 +130,12 @@ async (origineMessage, zk, commandeOptions) => {
 zokou({nomCom:"couplepp",categorie: "Weeb",reaction : "💞"},async(dest,zk,commandeOptions)=>{ const {repondre , ms} = commandeOptions;
     let api = 'https://smiling-hosiery-bear.cyclic.app/weeb/couplepp'
   try {
-     repondre('apres c\'est pour prendre goumin')
+     repondre('she/he dont love you :)')
  const result = await axios.get(api)
   
 
-    zk.sendMessage(dest, { image: { url: result.data.male }, caption: `_Pour Monsieur_` }, { quoted: ms })
-        zk.sendMessage(dest, { image: { url: result.data.female }, caption: `_Pour Madame_` }, { quoted: ms })
+    zk.sendMessage(dest, { image: { url: result.data.male }, caption: `For Man` }, { quoted: ms })
+        zk.sendMessage(dest, { image: { url: result.data.female }, caption: `_For woman_` }, { quoted: ms })
     
   } catch (e) { repondre(e)}                                                                                        
   

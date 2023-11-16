@@ -73,12 +73,12 @@ else {
     } else {
         if(!superUser) { repondre("there is no alive for this bot") ; return};
 
-      await   repondre("You have not yet saved your alive, to do this; type enter after alive your message and your image or video link in this context: .alive message;lien");
-         repondre(" I'm taking my time to explain to you; be careful if you are wrong")
+      await   repondre("You have not yet saved your alive, to do this;  enter after alive your message and your image or video link in this context: .alive message;lien");
+         repondre("don't do fake thinks :)")
      }
  } else {
 
-    if(!superUser) { repondre ("Only the owner has the right to modify the alive") ; return};
+    if(!superUser) { repondre ("Only the owner can  modify the alive") ; return};
 
   
     const texte = arg.join(' ').split(';')[0];

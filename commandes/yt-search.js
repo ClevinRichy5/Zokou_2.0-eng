@@ -9,7 +9,7 @@ zokou({ nomCom: "yts", categorie: "Search", reaction: "✋" }, async (dest, zk, 
   const query = arg.join(" ");
 
   if (!query[0]) {
-    repondre("Veuillez entrer un terme de recherche s'il vous plaît.");
+    repondre("what do you want");
     return;
   }
 
@@ -19,7 +19,7 @@ zokou({ nomCom: "yts", categorie: "Search", reaction: "✋" }, async (dest, zk, 
 
     let captions = "";
     for (let i = 0; i < 10; i++) {
-      captions += `----------------\nTitre : ${resultat[i].title}\nDurée : ${resultat[i].timestamp}\nLien : ${resultat[i].url}\n`;
+      captions += `----------------\nTitle: ${resultat[i].title}\nTime : ${resultat[i].timestamp}\nUrl: ${resultat[i].url}\n`;
     }
     captions += "\n======\n*powered by Zokou-Md*";
 
@@ -38,7 +38,7 @@ zokou({
   const { arg, ms, repondre } = commandeOptions;
 
   if (!arg[0]) {
-    repondre("Veillez entrer un lien youtube  s'il vous plaît");
+    repondre("insert a youtube link");
     return;
   }
 
@@ -100,7 +100,7 @@ zokou({
   const { ms, repondre, arg } = commandeOptions;
 
   if (!arg[0]) {
-    repondre("Veuillez insérer un lien youtube svp s'il vous plaît.");
+    repondre("Insert a youtube link");
     return;
   }
 

@@ -135,7 +135,7 @@ mediamsg = msgRepondu.videoMessage
 
 });
 
-zokou({nomCom:"jeprend",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
+zokou({nomCom:"take",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
    const {ms , msgRepondu,arg,repondre,nomAuteurMessage} = commandeOptions ;
 
   if(!msgRepondu) { repondre( 'make sure to mention the media' ) ; return } ;
@@ -152,7 +152,7 @@ mediamsg = msgRepondu.videoMessage
   else if (msgRepondu.stickerMessage) {
     mediamsg = msgRepondu.stickerMessage ;
   } else {
-    repondre('Euh un media svp'); return
+    repondre('Uh a media please'); return
   } ;
 
   var stick = await zk.downloadAndSaveMediaMessage(mediamsg)
@@ -173,7 +173,7 @@ mediamsg = msgRepondu.videoMessage
 
 
 
-zokou({ nomCom: "ecrire", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (origineMessage, zk, commandeOptions) => {
+zokou({ nomCom: "write", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (origineMessage, zk, commandeOptions) => {
   const { ms, msgRepondu, arg, repondre, nomAuteurMessage } = commandeOptions;
 
   if (!msgRepondu) {

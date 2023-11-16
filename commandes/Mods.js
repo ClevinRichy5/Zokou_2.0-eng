@@ -5,6 +5,7 @@ const {isUserBanned , addUserToBanList , removeUserFromBanList} = require("../bd
 const  {addGroupToBanList,isGroupBanned,removeGroupFromBanList} = require("../bdd/banGroup");
 const {isGroupOnlyAdmin,addGroupToOnlyAdminList,removeGroupFromOnlyAdminList} = require("../bdd/onlyAdmin");
 const {removeSudoNumber,addSudoNumber,issudo} = require("../bdd/sudo");
+const {updateThemeValue , getThemeChoice ,getAllThemesInfo,getThemeInfoById} = require('../bdd/theme');
 const conf = require("../set");
 const fs = require('fs');
 const sleep =  (ms) =>{
@@ -125,30 +126,7 @@ zokou({ nomCom: "jid", categorie: "Mods" }, async (dest, zk, commandeOptions) =>
 
         }) ;
 
-  /*zokou({ nomCom: "envoi", categorie: "Mods" }, async (dest, zk, commandeOptions) => {
-
-  const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage,auteurMsgRepondu } = commandeOptions;
-
-       if (!superUser) {
-    repondre("command reserved for the bot owner");
-    return;
-  } 
-    
-   if (!msgRepondu) {
-    repondre("Please mention the message");
-    return; };
-     if (!arg[0]) {
-    repondre('Be sure to put the recipient's jid');
-    return; } ;
-
-   const jid = arg.join(' ')
-     
-
-    /*const msg = getMessageFromStore(auteurMsgRepondu, msgRepondu)
-await zk.sendMessage( jid, { forward: msgRepondu }) // WA forward the message!
-
-  })
-; */
+  
 
 zokou({ nomCom: "block", categorie: "Mods" }, async (dest, zk, commandeOptions) => {
 
@@ -424,3 +402,40 @@ if (!superUser) {repondre('This command is only allowed to the bot owner') ; ret
   }
 });
 
+zokou({ nomCom: "theme",
+ categorie: "Mods",
+  reaction: "💞" }, async (dest, zk, commandeOptions) => {
+
+    const { arg, ms , mybotpic , prefixe, repondre,superUser} = commandeOptions;
+   if (!superUser) {repondre('Only mods can this command') ; return}
+    if (!arg[0] || arg === '') {
+
+        const allthemes = await getAllThemesInfo() ;
+   
+        let id = await getThemeChoice() ;
+        const imagemenu = await getThemeInfoById(id) ;
+        const {auteur, liens, nom} = imagemenu
+
+        let msg = `
+        Your actual theme is ${nom} ;
+
+   For choose , type ${prefixe}theme with number of the theme
+    
+  all zokou 's themes list ;
+  
+`
+    for (const theme of allthemes) {
+
+msg += `${theme.id} : *${theme.nom}* powered by ${theme.auteur}\n\n`
+    }
+    msg += `\n\n You can help with your theme if you want, Thanks.`
+
+    zk.sendMessage(dest , { image : {url : mybotpic()} , caption : msg} , {quoted : ms})
+
+    } else {
+  await updateThemeValue(arg[0]);
+
+      repondre('Theme succefully actualised')
+   }
+
+})
