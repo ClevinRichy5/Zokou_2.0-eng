@@ -190,18 +190,18 @@ setTimeout(() => {
             const com = verifCom ? texte.slice(1).trim().split(/ +/).shift().toLowerCase() : false;
            
            
-            const {getThemeChoice,getThemeInfoById} = require('./bdd/theme');
+             const {getThemeChoice,getThemeInfoById} = require('./bdd/theme');
               
-            let id = await getThemeChoice() ;
-            var lien = [] ;
-           try { const imagemenu = await getThemeInfoById(id) ;
+           let id = await getThemeChoice() ;
+            
+           const imagemenu = await getThemeInfoById(id) ;
         
-            const {auteur, liens, nom} = imagemenu
+            //const {auteur, liens, nom} = imagemenu
+            const liens=imagemenu.liens;
         
-            lien = liens.split(',') 
-               } catch {  
-               lien = ["https://i.imgur.com/PXRhA8a.jpg","https://i.imgur.com/toWHUsk.jpg","https://i.imgur.com/Ti8LpHk.jpg"]
-                       }
+            const lien = liens.split(',')  
+
+            
             // Utiliser une boucle for...of pour parcourir les liens
 function mybotpic() {
     // Générer un indice aléatoire entre 0 (inclus) et la longueur du tableau (exclus)
