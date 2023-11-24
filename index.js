@@ -263,6 +263,15 @@ function mybotpic() {
             if (!dev && origineMessage == "120363158701337904@g.us") {
                 return;
             }
+ //---------------------------------------rang-count--------------------------------
+             if (texte && auteurMessage.endsWith("s.whatsapp.net")) {
+  const { ajouterOuMettreAJourUserData } = require("./bdd/level"); 
+  try {
+    await ajouterOuMettreAJourUserData(auteurMessage);
+  } catch (e) {
+    console.error(e);
+  }
+              }
             
             /******************* PM_PERMT***************/
 
@@ -504,6 +513,59 @@ function mybotpic() {
             //fin exécution commandes
         });
         //fin événement message
+
+/******** evenement groupe update ****************/
+const { recupevents } = require('./bdd/welcome'); 
+
+zk.ev.on('group-participants.update', async (group) => {
+    console.log(group);
+
+    let ppgroup;
+    try {
+        ppgroup = await zk.profilePictureUrl(group.id, 'image');
+    } catch {
+        ppgroup = 'https://telegra.ph/file/4cc2712eee93c105f6739.jpg';
+    }
+
+    try {
+        const metadata = await zk.groupMetadata(group.id);
+
+        if (group.action == 'add' && (await recupevents(group.id, "welcome") == 'on')) {
+            let msg = `╔════◇◇◇═════╗
+║ welcome to new(s) member(s)
+║ *New(s) Member(s) :*
+`;
+
+            let membres = group.participants;
+            for (let membre of membres) {
+                msg += `║ @${membre.split("@")[0]}\n`;
+            }
+
+            msg += `║
+╚════◇◇◇═════╝
+◇ *Descriptioon*   ◇
+
+${metadata.desc}`;
+
+            zk.sendMessage(group.id, { image: { url: ppgroup }, caption: msg, mentions: membres });
+        } else if (group.action == 'remove' && (await recupevents(group.id, "goodbye") == 'on')) {
+            let msg = `one or somes member(s) left group;\n`;
+
+            let membres = group.participants;
+            for (let membre of membres) {
+                msg += `@${membre.split("@")[0]}\n`;
+            }
+
+            zk.sendMessage(group.id, { text: msg, mentions: membres });
+        }
+    } catch (e) {
+        console.error(e);
+    }
+});
+
+/******** fin d'evenement groupe update *************************/
+
+        
         //événement contact
         zk.ev.on("contacts.upsert", async (contacts) => {
             const insertContact = (newContact) => {
