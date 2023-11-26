@@ -5,7 +5,6 @@ const { format } = require(__dirname + "/../framework/mesfonctions");
 const os = require("os");
 const moment = require("moment-timezone");
 const s = require(__dirname + "/../set");
-const {getThemeInfoById , getThemeChoice} = require("../bdd/theme");
 
 zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
@@ -14,12 +13,10 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
     var mode = "public";
     
     if (s.MODE != "oui") {
-        mode = "privé";
+        mode = "private";
     }
 
-    let id = await getThemeChoice() ;
-const imagemenu = await getThemeInfoById(id) ;
-const {auteur, liens, nom} = imagemenu
+
     
 
     cm.map(async (com, index) => {
@@ -39,7 +36,6 @@ const date = moment().format('DD/MM/YYYY');
 ┃   *Préfix* : ${s.PREFIXE}
 ┃   *Owner* : ${s.NOM_OWNER}
 ┃   *Mode* : ${mode}
-┃   *Theme* : ${nom}
 ┃   *Commands* : ${cm.length}
 ┃   *Date* : ${date}
 ┃   *Hour* : ${temps}
@@ -51,7 +47,7 @@ const date = moment().format('DD/MM/YYYY');
     
 let menuMsg = `
 👋 Hello ${nomAuteurMessage} 👋
-I'm *${nom}*, a bot developped by team zokou.
+I'm *${s.NOM}*, a bot developped by team zokou.
 
 *List of commands :*
 ◇                             ◇

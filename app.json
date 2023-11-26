@@ -32,6 +32,20 @@
       "required":false
     }
     ,
+    "NOM_BOT" : {
+       
+      "description":"A name for your bot",
+      "value":"Zokou-MD",
+      "required":false
+
+    } ,
+     "LIENS_MENU" : {
+    
+      "description":"add one or many link for your bot menu  ; eg : url1,url2,url3.....",
+      "value":"Zokou-MD",
+      "required":false
+       
+     },
     "MODE_PUBLIC":
     {
       "description":"type 'oui' to put your bot on public mode or 'non' to put it on private mod",
