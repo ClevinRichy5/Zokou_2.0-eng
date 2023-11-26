@@ -189,11 +189,8 @@ setTimeout(() => {
             const verifCom = texte ? texte.startsWith(prefixe) : false;
             const com = verifCom ? texte.slice(1).trim().split(/ +/).shift().toLowerCase() : false;
            
-           
-             
-            const liens= [conf.URL]
-        
-            const lien = liens.split(',')  
+         
+            const lien = conf.URL.split(',')  
 
             
             // Utiliser une boucle for...of pour parcourir les liens
