@@ -25,8 +25,12 @@ Zokou is a multi-device bot designed to enhance your WhatsApp conversations with
 1. Click on **[Fork](https://github.com/Faouz995/Zokou_2.0-eng/fork)** to copy the repo to your GitHub account. Make sure to add a star 🌟 to encourage the developers.
 
 2. Obtain a bot session: 
-   - [Session-ID](https://replit.com/@zoukoumignon/ZokouQrCodeEn?v=1)
-   - [Replit](https://replit.com/@zoukoumignon/ZokouQrCodeEn?v=1)
+
+   [Pairing-Method-1](https://zokouqrcode-50ffb104aeb0.herokuapp.com/) <br> <br>
+
+  [Pairing-Method-2](https://zokouprmethod.onrender.com) <br> <br>
+  
+  [Replit](https://replit.com/@zoukoumignon/ZokouQrCode?v=1)
 
 3. Deploy
    - **Heroku Deployment:**
