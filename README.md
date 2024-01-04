@@ -26,11 +26,7 @@ Zokou is a multi-device bot designed to enhance your WhatsApp conversations with
 
 2. Obtain a bot session: 
 
-   [Pairing-Method-1](https://zokouqrcode-50ffb104aeb0.herokuapp.com/) <br> <br>
-
-  [Pairing-Method-2](https://zokouprmethod.onrender.com) <br> <br>
-  
-  [Replit](https://replit.com/@zoukoumignon/ZokouQrCode?v=1)
+   [Session](https://zokouscan.onrender.com/qrcode)
 
 3. Deploy
    - **Heroku Deployment:**
