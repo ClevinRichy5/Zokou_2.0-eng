@@ -1,7 +1,8 @@
 const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter');
 const { zokou } = require("../framework/zokou");
+const traduire = require("../framework/traduction");
 const { downloadMediaMessage,downloadContentFromMessage } =  require('@whiskeysockets/baileys');
-let fs=require("fs-extra") ;
+const fs = require("fs-extra") ;
 const axios = require('axios');  
 const FormData = require('form-data');
 const { exec } = require("child_process");
@@ -30,11 +31,11 @@ const alea = (ext) => {
     if (ms.message.imageMessage) {
       downloadFilePath = ms.message.imageMessage;
     } else {
-      // picture mentioned
+      // image mentionnée
       downloadFilePath =
         ms.message.extendedTextMessage.contextInfo.quotedMessage.imageMessage;
     }
-    // picture
+    // images
     const media = await downloadContentFromMessage(downloadFilePath, "image");
     let buffer = Buffer.from([]);
     for await (const elm of media) {
@@ -67,7 +68,7 @@ const alea = (ext) => {
 
     sticker = new Sticker(buffer, {
       pack:"Zokou-Md", // pack stick
-      author:  nomAuteurMessage, // name of the author of the stick
+      author:  nomAuteurMessage, // nom de l auteur du stick
       type:
         arg.includes("-r") || arg.includes("-c")
           ? StickerTypes.CROPPED
@@ -75,7 +76,7 @@ const alea = (ext) => {
       quality: 40,
     });
   } else {
-    repondre("Please mention an image or video!");
+    repondre("Veuillez mentionné une image ou une vidéo!");
     return;
   }
 
@@ -102,7 +103,7 @@ try{
 zokou({nomCom:"scrop",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
    const {ms , msgRepondu,arg,repondre,nomAuteurMessage} = commandeOptions ;
 
-  if(!msgRepondu) { repondre( 'make sure to mention the media' ) ; return } ;
+  if(!msgRepondu) { repondre( 'veiller mentionner le media' ) ; return } ;
   if(!(arg[0])) {
        pack = nomAuteurMessage
   } else {
@@ -113,10 +114,8 @@ zokou({nomCom:"scrop",categorie: "Conversion", reaction: "👨🏿‍💻"},asyn
   } else if(msgRepondu.videoMessage) {
 mediamsg = msgRepondu.videoMessage
   } 
-  else if (msgRepondu.stickerMessage) {
-    mediamsg = msgRepondu.stickerMessage ;
-  } else {
-    repondre('Uh media please'); return
+   else {
+    repondre('Euh un media svp'); return
   } ;
 
   var stick = await zk.downloadAndSaveMediaMessage(mediamsg)
@@ -135,10 +134,10 @@ mediamsg = msgRepondu.videoMessage
 
 });
 
-zokou({nomCom:"take",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
+zokou({nomCom:"jeprend",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
    const {ms , msgRepondu,arg,repondre,nomAuteurMessage} = commandeOptions ;
 
-  if(!msgRepondu) { repondre( 'make sure to mention the media' ) ; return } ;
+  if(!msgRepondu) { repondre( 'veiller mentionner le media' ) ; return } ;
   if(!(arg[0])) {
        pack = nomAuteurMessage
   } else {
@@ -152,7 +151,7 @@ mediamsg = msgRepondu.videoMessage
   else if (msgRepondu.stickerMessage) {
     mediamsg = msgRepondu.stickerMessage ;
   } else {
-    repondre('Uh a media please'); return
+    repondre('Euh un media svp'); return
   } ;
 
   var stick = await zk.downloadAndSaveMediaMessage(mediamsg)
@@ -173,38 +172,38 @@ mediamsg = msgRepondu.videoMessage
 
 
 
-zokou({ nomCom: "write", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (origineMessage, zk, commandeOptions) => {
+zokou({ nomCom: "ecrire", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (origineMessage, zk, commandeOptions) => {
   const { ms, msgRepondu, arg, repondre, nomAuteurMessage } = commandeOptions;
 
   if (!msgRepondu) {
-    repondre('Please mention an image');
+    repondre('Veuillez mentionner une image');
     return;
   }
 
   if (!msgRepondu.imageMessage) {
-    repondre('The command only works with images');
+    repondre('La commande ne fonctionne qu\'avec des images');
     return;
   } ;
   text = arg.join(' ') ;
   
-  if(!text || text === null) {repondre('Make sure to insert text') ; return } ;
+  if(!text || text === null) {repondre('Veiller inserer un texte') ; return } ;
  
   
   const mediamsg = msgRepondu.imageMessage;
   const image = await zk.downloadAndSaveMediaMessage(mediamsg);
 
-  //Create a FormData object
+  // Créer un objet FormData
   const data = new FormData();
   data.append('image', fs.createReadStream(image));
 
-  //Configure headers
-  const clientId = 'b40a1820d63cd4e'; // Replace with your Imgur client ID
+  // Configurer les en-têtes
+  const clientId = 'b40a1820d63cd4e'; // Remplacez par votre client ID Imgur
   const headers = {
     'Authorization': `Client-ID ${clientId}`,
     ...data.getHeaders()
   };
 
-  // Configure the query
+  // Configurer la requête
   const config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -218,10 +217,10 @@ zokou({ nomCom: "write", categorie: "Conversion", reaction: "👨🏿‍💻" },
     const imageUrl = response.data.data.link;
     console.log(imageUrl)
 
-    //Use imageUrl however you want (meme creation, etc.)
+    // Utiliser imageUrl comme vous le souhaitez (création de mème, etc.)
     const meme = `https://api.memegen.link/images/custom/-/${text}.png?background=${imageUrl}`;
 
-    // Create the sticker
+    // Créer le sticker
     const stickerMess = new Sticker(meme, {
       pack: nomAuteurMessage,
       author: 'Zokou-Md',
@@ -240,33 +239,33 @@ zokou({ nomCom: "write", categorie: "Conversion", reaction: "👨🏿‍💻" },
     );
 
   } catch (error) {
-    console.error('Error uploading to Imgur :', error);
-    repondre('An error occurred while creating the meme.');
+    console.error('Erreur lors de l\'envoi sur Imgur :', error);
+    repondre('Une erreur est survenue lors de la création du mème.');
   }
 });
 
-zokou({nomCom:"url",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
+/* zokou({nomCom:"url",categorie: "Conversion", reaction: "👨🏿‍💻"},async(origineMessage,zk,commandeOptions)=>{
    const {ms , msgRepondu,arg,repondre,nomAuteurMessage} = commandeOptions ;
 
-  if(!msgRepondu) { repondre( 'make sure to mention the media' ) ; return } ;
+  if(!msgRepondu) { repondre( 'veiller mentionner le media' ) ; return } ;
  
   if (msgRepondu.imageMessage) {
      mediamsg = msgRepondu.imageMessage
 
      const image = await zk.downloadAndSaveMediaMessage(mediamsg);
 
-  // Create a FormData object
+  // Créer un objet FormData
   const data = new FormData();
   data.append('image', fs.createReadStream(image));
 
-  // Configure headers
-  const clientId = 'b40a1820d63cd4e'; // Replace with your Imgur client ID
+  // Configurer les en-têtes
+  const clientId = 'b40a1820d63cd4e'; // Remplacez par votre client ID Imgur
   const headers = {
     'Authorization': `Client-ID ${clientId}`,
     ...data.getHeaders()
   };
 
-  //Configure headers
+  // Configurer la requête
   const config = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -289,20 +288,20 @@ mediamsg = msgRepondu.videoMessage
     mediamsg = msgRepondu.stickerMessage ;
     repondre('commande non achever') ; return
   } else {
-    repondre('Uh media please'); return
-  } ;
+    repondre('Euh un media svp'); return
+  } ; 
 
 
       
-                  } );
+                  } ); */
 
 zokou({nomCom:"photo",categorie: "Conversion", reaction: "👨🏿‍💻"},async(dest,zk,commandeOptions)=>{
    const {ms , msgRepondu,arg,repondre,nomAuteurMessage} = commandeOptions ;
 
-  if(!msgRepondu) { repondre( 'make sure to mention the media' ) ; return } ;
+  if(!msgRepondu) { repondre( 'veiller mentionner le media' ) ; return } ;
  
    if (!msgRepondu.stickerMessage) {
-      repondre('Um mention a non-animated sticker'); return
+      repondre('Euh mentionner un sticker non-animé'); return
   } ;
 
  let mediaMess = await zk.downloadAndSaveMediaMessage(msgRepondu.stickerMessage);
@@ -319,7 +318,7 @@ zokou({nomCom:"photo",categorie: "Conversion", reaction: "👨🏿‍💻"},asyn
             zk.sendMessage(
               dest,
               {
-                text: 'A non-animated sticker please',
+                text: 'Un sticker non animé svp',
               },
               { quoted: ms }
             );
@@ -334,3 +333,91 @@ zokou({nomCom:"photo",categorie: "Conversion", reaction: "👨🏿‍💻"},asyn
           fs.unlinkSync(ran);
         });
 });
+
+async function uploadToTelegraph(Path) {
+    if (!fs.existsSync(Path)) {
+        throw new Error("Fichier non existant");
+    }
+
+    try {
+        const form = new FormData();
+        form.append("file", fs.createReadStream(Path));
+
+        const { data } = await axios.post("https://telegra.ph/upload", form, {
+            headers: {
+                ...form.getHeaders(),
+            },
+        });
+
+        if (data && data[0] && data[0].src) {
+            return "https://telegra.ph" + data[0].src;
+        } else {
+            throw new Error("Erreur lors de la récupération du lien de la vidéo");
+        }
+    } catch (err) {
+        throw new Error(String(err));
+    }
+}
+
+zokou({ nomCom: "url", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (origineMessage, zk, commandeOptions) => {
+    const { msgRepondu, repondre } = commandeOptions;
+
+    if (!msgRepondu) {
+        repondre('Veuillez mentionner une vidéo ou une image.');
+        return;
+    }
+
+    let mediaPath;
+
+    if (msgRepondu.videoMessage) {
+        mediaPath = await zk.downloadAndSaveMediaMessage(msgRepondu.videoMessage);
+    } else if (msgRepondu.imageMessage) {
+        mediaPath = await zk.downloadAndSaveMediaMessage(msgRepondu.imageMessage);
+    } else {
+        repondre('Veuillez mentionner une vidéo ou une image.');
+        return;
+    }
+
+    try {
+        const telegraphUrl = await uploadToTelegraph(mediaPath);
+        fs.unlinkSync(mediaPath);  // Supprime le fichier après utilisation
+
+        repondre(telegraphUrl);
+    } catch (error) {
+        console.error('Erreur lors de la création du lien Telegraph :', error);
+        repondre('Erreur lors de la création du lien Telegraph.');
+    }
+});
+
+
+zokou({ nomCom: "trd", categorie: "Conversion", reaction: "👨🏿‍💻" }, async (dest, zk, commandeOptions) => {
+
+  const { msgRepondu, repondre , arg } = commandeOptions;
+
+  
+   if(msgRepondu) {
+     try {
+      
+     
+
+       if(!arg || !arg[0]) { repondre('indiquer le language dans lequel vous voulez traduire (ex :  fr , en)') ; return }
+   
+
+         let texttraduit = await traduire(msgRepondu.conversation , {to : arg[0]}) ;
+
+         repondre(texttraduit)
+
+        } catch (error) {
+          
+          repondre('Mentionner un message texte') ;
+      
+        }
+
+   } else {
+     
+     repondre('Mentionner le message texte a traduire')
+   }
+
+
+
+})

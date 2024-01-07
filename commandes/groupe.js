@@ -8,31 +8,32 @@ const {atbajouterOuMettreAJourJid,atbrecupererActionJid,atbverifierEtatJid,atbme
 const fs = require("fs-extra");
 const conf = require("../set");
 const { uploadImageToImgur } = require('../framework/imgur');
+const { recupevents } = require('../bdd/welcome');
 
 
 
 
-zokou({ nomCom: "tagall", categorie: 'Group', reaction: "📣" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "appel", categorie: "Groupe", reaction: "📣" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, arg, verifGroupe, nomGroupe, infosGroupe, nomAuteurMessage, verifAdmin, superUser } = commandeOptions
 
 
  
 
-  if (!verifGroupe) { repondre("✋🏿 ✋🏿this command is reserved for groups ❌"); return; }
+  if (!verifGroupe) { repondre("✋🏿 ✋🏿cette commande est réservée aux groupes ❌"); return; }
   if (!arg || arg === ' ') {
   mess = 'Aucun Message'
   } else {
     mess = arg.join(' ')
   } ;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
-  var tag = ""; let car = `──────▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n───▄▄██▌█ the Caravan \n▄▄▄▌▐██▌█ of Happiness is coming\n███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌\n▀(⊙)▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀▀▀▀▀▀(⊙)▀▀`
+  var tag = ""; let car = `──────▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n───▄▄██▌█ la Caravane du\n▄▄▄▌▐██▌█ bonheur arrive\n███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌\n▀(⊙)▀▀▀▀▀▀▀(⊙)(⊙)▀▀▀▀▀▀▀▀▀▀(⊙)▀▀`
 
   tag += `========================\n  
         🌟 *Zokou-Md* 🌟
 ========================\n
-👥 Group : ${nomGroupe} 🚀 
-👤 Autor : *${nomAuteurMessage}* 👋 
+👥 Groupe : ${nomGroupe} 🚀 
+👤 Auteur : *${nomAuteurMessage}* 👋 
 📜 Message : *${mess}* 📝
 ========================\n
 \n
@@ -55,20 +56,20 @@ zokou({ nomCom: "tagall", categorie: 'Group', reaction: "📣" }, async (dest, z
 
   zk.sendMessage(dest, { text: tag, mentions: membresGroupe.map((i) => i.id) }, { quoted: ms })
 
-   } else { repondre('command reserved for admins')}
+   } else { repondre('commande reserver aux admins')}
 
 });
 
 
-zokou({ nomCom: "link", categorie: 'Group', reaction: "🙋" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "lien", categorie: "Groupe", reaction: "🙋" }, async (dest, zk, commandeOptions) => {
   const { repondre, nomGroupe, nomAuteurMessage, verifGroupe } = commandeOptions;
-  if (!verifGroupe) { repondre("wait bro , you want the link to my dm?"); return; };
+  if (!verifGroupe) { repondre("wait bro , tu veux le lien de mon dm?"); return; };
 
 
   var link = await zk.groupInviteCode(dest)
   var lien = `https://chat.whatsapp.com/${link}`;
 
-  let mess = `hello ${nomAuteurMessage} , here is the group link ${nomGroupe} \n
+  let mess = `salut ${nomAuteurMessage} , voici le lien du groupe ${nomGroupe} \n
 
 Lien :${lien}`
   repondre(mess)
@@ -76,10 +77,14 @@ Lien :${lien}`
 
 });
 /** *nommer un membre comme admin */
-zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "nommer", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
-  if (!verifGroupe) { return repondre("For groups only"); }
+  if (!verifGroupe) { return repondre("Pour les groupe uniquement"); }
+
+  const met = await zk.groupMetadata(dest) ;
+
+  if(await recupevents(dest,'antipromote') == 'oui' && (met.author =! auteurMessage) )  { repondre('Vous avez pas droit de Nommer des participants car le antipromote est actif') ; return} ;
 
 
   const verifMember = (user) => {
@@ -119,18 +124,18 @@ zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
         if (zkad) {
           if (membre) {
             if (admin == false) {
-              var txt = `🎊🎊🎊  @${auteurMsgRepondu.split("@")[0]} rose in rank.\n
-                      he/she has been named group administrator.`
+              var txt = `🎊🎊🎊  @${auteurMsgRepondu.split("@")[0]} est monté(e) en grade.\n
+                      il/elle a été nommé(e) administrateur du groupe.`
               await zk.groupParticipantsUpdate(dest, [auteurMsgRepondu], "promote");
               zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] })
-            } else { return repondre("This member is already an administrator of the group.") }
+            } else { return repondre("Ce membre est déja administrateur du groupe.") }
 
-          } else { return repondre("This user is not part of the group."); }
+          } else { return repondre("Cet utilisateur ne fait pas partir du groupe."); }
         }
-        else { return repondre("Sorry, I cannot perform this action because I am not an administrator of the group.") }
+        else { return repondre("Désolé je ne peut pas effectuer cette action car je ne suis pas administrateur du groupe .") }
 
-      } else { repondre("please tag the member to be nominated"); }
-    } else { return repondre("Sorry I cannot perform this action because you are not an administrator of the group.") }
+      } else { repondre("veuiller taguer le membre à nommer"); }
+    } else { return repondre("Désolé je ne peut pas effectuer cette action car vous n'êtes pas administrateur du groupe .") }
   } catch (e) { repondre("oups " + e) }
 
 })
@@ -138,10 +143,14 @@ zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
 //fin nommer
 /** ***demettre */
 
-zokou({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "demettre", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
-  if (!verifGroupe) { return repondre("For groups only"); }
+  if (!verifGroupe) { return repondre("Pour les groupe uniquement"); }
+
+  const met = await zk.groupMetadata(dest) ;
+
+  if(await recupevents(dest,'antidemote') == 'oui' && (met.author =! auteurMessage) )  { repondre('Vous avez pas droit de denommer des participants car le antidemote est actif') ; return} ;
 
 
   const verifMember = (user) => {
@@ -182,20 +191,20 @@ zokou({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
           if (membre) {
             if (admin == false) {
 
-              repondre("This member is not a group administrator.")
+              repondre("Ce membre n'est pas un  administrateur du groupe.")
 
             } else {
-              var txt = `@${auteurMsgRepondu.split("@")[0]} was removed from his position as a group administrator\n`
+              var txt = `@${auteurMsgRepondu.split("@")[0]} a été  démis de ses fonctions d'administrateur du groupe..\n`
               await zk.groupParticipantsUpdate(dest, [auteurMsgRepondu], "demote");
               zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] })
             }
 
-          } else { return repondre("This user is not part of the group."); }
+          } else { return repondre("Cet utilisateur ne fait pas partir du groupe."); }
         }
-        else { return repondre("Sorry I cannot perform this action because I am not an administrator of the group.") }
+        else { return repondre("Désolé je ne peut pas effectuer cette action car je ne suis pas administrateur du groupe .") }
 
-      } else { repondre("please tag the member to be removed"); }
-    } else { return repondre("Sorry I cannot perform this action because you are not an administrator of the group.") }
+      } else { repondre("veuiller taguer le membre à démettre"); }
+    } else { return repondre("Désolé je ne peut pas effectuer cette action car vous n'êtes pas administrateur du groupe .") }
   } catch (e) { repondre("oups " + e) }
 
 })
@@ -204,10 +213,10 @@ zokou({ nomCom: "demote", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
 
 /** ***fin démettre****  **/
 /** **retirer** */
-zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "retirer", categorie: "Groupe", reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { ms, repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifAdmin, verifZokouAdmin, verifGroupe, utilisateur, mbre, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : ""
-  if (!verifGroupe) { return repondre("for groups only"); }
+  if (!verifGroupe) { return repondre("Pour les groupe uniquement"); }
 
 
   const verifMember = (user) => {
@@ -259,19 +268,19 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
               });
 
               await sticker.toFile("st.webp")
-              var txt = `@${auteurMsgRepondu.split("@")[0]} was removed from the group.\n`
+              var txt = `@${auteurMsgRepondu.split("@")[0]} a été rétiré du groupe..\n`
             /*  zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: ms.message.extendedTextMessage.contextInfo.stanzaId})*/
               await zk.groupParticipantsUpdate(dest, [auteurMsgRepondu], "remove");
               zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] })
 
-            } else { repondre("This member cannot be removed because he is an administrator of the group.") }
+            } else { repondre("Ce membre ne peut pas être rétirer car il est un  administrateur du groupe.") }
 
-          } else { return repondre("This user is not part of the group."); }
+          } else { return repondre("Cet utilisateur ne fait pas partir du groupe."); }
         }
-        else { return repondre("Sorry, I cannot perform this action because I am not an administrator of the group.") }
+        else { return repondre("Désolé je ne peut pas effectuer cette action car je ne suis pas administrateur du groupe .") }
 
-      } else { repondre("please tag the member to be removed"); }
-    } else { return repondre("Sorry I cannot perform this action because you are not an administrator of the group .") }
+      } else { repondre("veuiller taguer le membre à rétirer"); }
+    } else { return repondre("Désolé je ne peut pas effectuer cette action car vous n'êtes pas administrateur du groupe .") }
   } catch (e) { repondre("oups " + e) }
 
 })
@@ -280,15 +289,15 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
 /** *****fin retirer */
 
 
-zokou({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "supp", categorie: "Groupe",reaction:"🧹" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe,auteurMsgRepondu,idBot, msgRepondu, verifAdmin, superUser, auteurMessage ,verifZokouAdmin} = commandeOptions;
   
   if (!msgRepondu) {
-    repondre("Please mention the Message to be deleted");
+    repondre("Veuilez mentionner le Message à supprimer");
     return;
   }
-  if(superUser)
+  if(superUser && auteurMsgRepondu==idBot )
   {
     
        if(auteurMsgRepondu==idBot)
@@ -299,7 +308,7 @@ zokou({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, co
       id: ms.message.extendedTextMessage.contextInfo.stanzaId,
          }
          await zk.sendMessage(dest,{delete:key});return;
-       }
+       } /*
       else if(auteurMsgRepondu!=idBot && !verifGroupe)
        {
              try{
@@ -310,36 +319,45 @@ zokou({ nomCom: "del", categorie: 'Group',reaction:"🧹" }, async (dest, zk, co
       id: ms.message.extendedTextMessage.contextInfo.stanzaId,
          }
          await zk.sendMessage(dest,{delete:key});return;
-             }catch(erreur){repondre("an error while deleting the mess "+e)}
-       }
+             }catch(erreur){repondre("oups une erreur lors de la suppression du message "+e)}
+       } */
   }
 
           if(verifGroupe)
           {
                if(verifAdmin || superUser)
                {
-                    if(verifZokouAdmin)
-                    {
+                    
                          try{
-                        
-            const key={
-            remoteJid:dest,
-      fromMe: false,
-      id: ms.message.extendedTextMessage.contextInfo.stanzaId,
-         }
+                
+                          const fs = require('fs');
+                         
+                         
+                          
+            // console.log(ms.message.extendedTextMessage.contextInfo.stanzaId)  ;         
+            const key=   {
+               remoteJid : dest,
+               id : ms.message.extendedTextMessage.contextInfo.stanzaId ,
+               fromMe : false,
+               participant : ms.message.extendedTextMessage.contextInfo.participant
+
+            }         // await getMessageKeyByStanzaIdAndJid('./store.json', ms.message.extendedTextMessage.contextInfo.stanzaId,dest)
+          //  console.log(key);
+         
          await zk.sendMessage(dest,{delete:key});return;
-             }catch(erreur){repondre("an error while deleting the mess "+e)}
-                    }
+
+             }catch(e){repondre("J'ai besoins des droit d'administration")}
+                    
                       
-               }else{repondre("Sorry I'm not an administrator of the group.")}
+               }else{repondre("Désolé vous n'etes pas administrateur du groupe.")}
           }
 });
 
-zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
-  const { ms, repondre, verifGroupe, verifZokouAdmin } = commandeOptions;
-  if (!verifGroupe) { repondre("order reserved for the group only"); return };
+zokou({ nomCom: "info", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
+  const { ms, repondre, verifGroupe, verifZokouAdmin , mybotpic } = commandeOptions;
+  if (!verifGroupe) { repondre("commande réservée au groupe uniquement"); return };
 
- try { ppgroup = await zk.profilePictureUrl(dest ,'image') ; } catch { ppgroup = conf.IMAGE_MENU}
+ try { ppgroup = await zk.profilePictureUrl(dest ,'image') ; } catch { ppgroup = mybotpic()}
 
     const info = await zk.groupMetadata(dest)
 
@@ -348,7 +366,7 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
     let mess = {
       image: { url: ppgroup },
-      caption:  `*━━━━『Info du groupe』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
+      caption:  `*━━━━『Info du groupe』━━━━*\n\n*🎐Nom:* ${info.subject}\n\n*🔩ID du Groupe:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
     }
 
 
@@ -359,7 +377,7 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
  //------------------------------------antilien-------------------------------
 
- zokou({ nomCom: "antilink", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
+ zokou({ nomCom: "antilien", categorie: "Groupe", reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
   var { ms, repondre, arg, verifGroupe, auteurMessage, superUser, verifZokouAdmin, verifAdmin,prefixe, dev } = commandeOptions;
@@ -367,49 +385,48 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
   
   if (!verifGroupe) {
-    return repondre("*for groups only*");
+    return repondre("*uniquement pour les groupes*");
   }
   
   if( superUser || verifAdmin) {
     const enetatoui = await verifierEtatJid(dest)
     try {
-      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command *on* or *off* To modify the action of the antilink, type after the command action/"your-action " ; the different actions are delete; warn and remove') ; return};
+      if (!arg || !arg[0] || arg === ' ') { repondre('Voici une explication du fonctionnement de l\'antilien de zokou:\nPour activer l\'antilien , ajouter apres la commande "oui" ou "non";\nPour modifier l\'action de l\'antilien, tapez apres la commande action/"votre-action" ; les differentes actions sont supp ; warn et retirer') ; return};
      
-      if(arg[0] === 'on') {
+      if(arg[0] === 'oui') {
 
       
-       if(enetatoui ) { repondre("the antilink is already activated for this group")
+       if(enetatoui ) { repondre("l'antilien est deja activer pour se groupe")
                     } else {
                   await ajouterOuMettreAJourJid(dest,"oui");
                 
-              repondre("the antilink is activated successfully") }
+              repondre("l'antilien est activer avec succes") }
      
-            } else if (arg[0] === "off") {
+            } else if (arg[0] === "non") {
 
               if (enetatoui) { 
                 await ajouterOuMettreAJourJid(dest , "non");
 
-                repondre("The antilink has been successfully deactivated");
+                repondre("L'antilien a été desactivé avec succes");
                 
               } else {
-                repondre("antilink is not activated for this group");
+                repondre("l'antilien n'est pas activer pour ce groupe");
               }
             } else if (arg.join('').split("/")[0] === 'action') {
-                            
 
                await mettreAJourAction(dest,arg.join('').split("/")[1]);
 
-               repondre(`the action of the antilink has been updated on ${arg.join('').split("/")[1]}`);
+               repondre(`l'action de l'antilien a été actualisée sur ${arg.join('').split("/")[1]}`);
             
 
-            } else repondre('Here is an explanation of how zokou\'s antilink works:\nTo activate the antilink, add after the command "on" or "off" To modify the action of the antilink, type after the command action/"your-action " ; the different actions are *delete* , *warn* and *remove*')
+            } else repondre('Voici une expliction du fonctionnement de l\'antilien de zokou:\nPour activer l\'antilien , ajouter apres la commande "oui" ou "non";\nPour modifier l\'action de l\'antilien, tapez apres la commande action/"votre-action" ; les differentes actions sont supp ; warn et retirer')
 
       
     } catch (error) {
        repondre(error)
     }
 
-  } else { repondre('You are not entitled to this order')
+  } else { repondre('Vous avez pas droit a cette commande')
   }
 
 });
@@ -419,7 +436,7 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
  //------------------------------------antibot-------------------------------
 
- zokou({ nomCom: "antibot", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
+ zokou({ nomCom: "antibot", categorie: "Groupe", reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
   var { ms, repondre, arg, verifGroupe, auteurMessage, superUser, verifZokouAdmin, verifAdmin,prefixe, dev } = commandeOptions;
@@ -427,142 +444,136 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
   
   if (!verifGroupe) {
-    return repondre("*for groups only*");
+    return repondre("*uniquement pour les groupes*");
   }
   
   if( superUser || verifAdmin) {
     const enetatoui = await atbverifierEtatJid(dest)
     try {
-      if (!arg || !arg[0] || arg === ' ') { repondre('Here is an explanation of how the zokou antibot works:\nTo activate the antibot, add *on* or *off* after the command;\nTo modify the action of the antibot, type after the command action/"your-action" ; the different actions are deleted; warn and remove') ; return};
+      if (!arg || !arg[0] || arg === ' ') { repondre('Voici une explication du fonctionnement de l\'antibot de zokou:\nPour activer l\'antibot , ajouter apres la commande "oui" ou "non";\nPour modifier l\'action de l\'antibot, tapez apres la commande action/"votre-action" ; les differentes actions sont supp ; warn et retirer') ; return};
      
-      if(arg[0] === 'on') {
+      if(arg[0] === 'oui') {
 
       
-       if(enetatoui ) { repondre("the antibot is already activated for this group")
+       if(enetatoui ) { repondre("l'antibot est deja activer pour se groupe")
                     } else {
                   await atbajouterOuMettreAJourJid(dest,"oui");
                 
-              repondre("the antibot is successfully activated") }
+              repondre("l'antibot est activer avec succes") }
      
-            } else if (arg[0] === "off") {
+            } else if (arg[0] === "non") {
 
               if (enetatoui) { 
                 await atbajouterOuMettreAJourJid(dest , "non");
 
-                repondre("The antibot has been successfully deactivated");
+                repondre("L'antibot a été desactivé avec succes");
                 
               } else {
-                repondre("antibot is not activated for this group");
+                repondre("l'antibot n'est pas activer pour ce groupe");
               }
             } else if (arg.join('').split("/")[0] === 'action') {
 
                await atbmettreAJourAction(dest,arg.join('').split("/")[1]);
 
-               repondre(`the action of the antibot has been updated on ${arg.join('').split("/")[1]}`);
+               repondre(`l'action de l'antibot a été actualisée sur ${arg.join('').split("/")[1]}`);
             
 
-            } else repondre('Here is an explanation of how the zokou antibot works:\nTo activate the antibot, add "yes" or "no" after the command;\nTo modify the action of the antibot, type after the command action/"your-action" ; the different actions are deleted; warn and remove')
+            } else repondre('Voici une explication du fonctionnement de l\'antibot de zokou:\nPour activer l\'antibot , ajouter apres la commande "oui" ou "non";\nPour modifier l\'action de l\'antibot, tapez apres la commande action/"votre-action" ; les differentes actions sont supp ; warn et retirer')
 
       
     } catch (error) {
        repondre(error)
     }
 
-  } else { repondre('You are not entitled to this order')
+  } else { repondre('Vous avez pas droit a cette commande')
   }
 
 });
 
 //----------------------------------------------------------------------------
 
-zokou({ nomCom: "group", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "groupe", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage, arg } = commandeOptions;
 
-  if (!verifGroupe) { repondre("order reserved for group only"); return };
-  if (superUser || verifAdmin) {
-
-    if (!arg[0]) { repondre('Instructions:\n\nType group open or close'); return; }
-    const option = arg.join(' ')
-    switch (option) {
-      case "open":
-        await zk.groupSettingUpdate(dest, 'not_announcement')
-        repondre('group open')
-        break;
-      case "close":
-        await zk.groupSettingUpdate(dest, 'announcement');
-        repondre('Group close successfully');
-        break;
-      default: repondre("Please don't invent an option")
-    }
-
-    
-  } else {
-    repondre("order reserved for the administratorr");
+  if (!verifGroupe) { repondre("commande reserver au groupe uniquement"); return };
+  if (!superUser || !verifAdmin) {
+    repondre("commande reservée au admininistrateur");
     return;
   }
- 
+  if (!arg[0]) { repondre('Consigne :\n\nTaper groupe ouvrir ou fermer'); return; }
+  const option = arg.join(' ')
+  switch (option) {
+    case "ouvrir":
+      await zk.groupSettingUpdate(dest, 'not_announcement')
+      repondre('Groupe Ouvert')
+      break;
+    case "fermer":
+      await zk.groupSettingUpdate(dest, 'announcement');
+      repondre('Groupe fermer avec succes');
+      break;
+    default: repondre("N'inventez pas d'option svp")
+  }
 
 });
 
-zokou({ nomCom: "left", categorie: "Mods" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "bye", categorie: "Mods" }, async (dest, zk, commandeOptions) => {
 
   const { ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
-  if (!verifGroupe) { repondre("order reserved for group only"); return };
+  if (!verifGroupe) { repondre("commande reserver au groupe uniquement"); return };
   if (!superUser) {
-    repondre("command reserved for the bot owner");
+    repondre("commande reservée au proprietaire du bot");
     return;
   }
-  await repondre('sayonnara') ;
-   
-  zk.groupLeave(dest)
+   repondre('sayonnara') ;
+  await zk.groupLeave(dest)
 });
 
-zokou({ nomCom: "gname", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gnom", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
   if (!verifAdmin) {
-    repondre("order reserved for administrators of the group");
+    repondre("commande reservée au admi,istrateurs du groupe");
     return;
   };
   if (!arg[0]) {
-    repondre("Please enter the group name");
+    repondre("Veiller entrer le nom du groupe svp");
     return;
   };
    const nom = arg.join(' ')
   await zk.groupUpdateSubject(dest, nom);
-    repondre(`group name refresh: *${nom}*`)
+    repondre(`nom du groupe actualiser: *${nom}*`)
 
  
 }) ;
 
-zokou({ nomCom: "gdesc", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gdesc", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
   if (!verifAdmin) {
-    repondre("order reserved for administrators of the group");
+    repondre("commande reservée au admi,istrateurs du groupe");
     return;
   };
   if (!arg[0]) {
-    repondre("Please enter the group description");
+    repondre("Veiller entrer la description du groupe svp");
     return;
   };
    const nom = arg.join(' ')
   await zk.groupUpdateDescription(dest, nom);
-    repondre(`group description update: *${nom}*`)
+    repondre(`description  du groupe actualiser: *${nom}*`)
 
  
 }) ;
 
 
-zokou({ nomCom: "gpp", categorie: 'Group' }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "gpp", categorie: "Groupe" }, async (dest, zk, commandeOptions) => {
 
   const { arg, ms, repondre, verifGroupe, msgRepondu, verifAdmin, superUser, auteurMessage } = commandeOptions;
 
   if (!verifAdmin) {
-    repondre("order reserved for administrators of the group");
+    repondre("commande reservée au admi,istrateurs du groupe");
     return;
   }; 
   if (msgRepondu.imageMessage) {
@@ -576,19 +587,19 @@ zokou({ nomCom: "gpp", categorie: 'Group' }, async (dest, zk, commandeOptions) =
 )
         
   } else {
-    repondre('Please mention an image')
+    repondre('Veiller mentionner une image svp')
   }
 
 });
 
 /////////////
-zokou({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+/* zokou({nomCom:"annonce",categorie:"Groupe",reaction:"🎤"},async(dest,zk,commandeOptions)=>{
 
 
 const {ms,repondre,msgRepondu,verifGroupe,prefixe,arg}=commandeOptions;
 
 
-if(!verifGroupe){return repondre("for groups only ⛔️");}
+if(!verifGroupe){return repondre("Pour les groupes uniquement ⛔️");}
 
 const infoGroupe=verifGroupe?await zk.groupMetadata(dest).catch((e)=>{console.log(e);}):"";
 
@@ -619,12 +630,12 @@ const isImgRpd=msgRepondu.imageMessage?true:false;
 
 const imgRpd=isImgRpd?await zk.downloadAndSaveMediaMessage(msgRepondu.imageMessage):null;
 
-const titreImg=isImgRpd?msgRepondu.imageMessag.caption:"";*/
+const titreImg=isImgRpd?msgRepondu.imageMessag.caption:"";****
 
          if(msgRepondu)
             {
 
-    /** *********^^^^^^^^^^^^/ *///////////////////////////////////////////
+    /** *********^^^^^^^^^^^^/ ///////////////////////////////////////////
              
            const isTextRpd=msgRepondu.extendedTextMessage?.text?true:false;
 
@@ -657,7 +668,7 @@ if(isImgRpd)
 }else if(isTextRpd)
 { 
 
-  /*repondre(msgRepondu.extendedTextMessage?.text)*/
+  /*repondre(msgRepondu.extendedTextMessage?.text) ****
   
    await zk.sendMessage(dest,{text:textRpd,mentions:membres.map((i)=>i.id)})
 }
@@ -668,10 +679,117 @@ if(isImgRpd)
 { 
     const txt =arg.join(" ")
       await zk.sendMessage(dest,{text:txt,mentions:membres.map((i)=>i.id)})
-} else { repondre("what should I announce please") }
+} else { repondre("que dois-je annoncer svp") }
 
 
-}catch(e){return repondre("oops an error : "+e);}
+}catch(e){return repondre("oups une erreur : "+e);}
 
 
 });
+ */
+
+
+zokou({nomCom:"annonce",categorie:"Groupe",reaction:"🎤"},async(dest,zk,commandeOptions)=>{
+
+
+  const {ms,repondre,msgRepondu,verifGroupe,prefixe, arg ,verifAdmin , superUser}=commandeOptions;
+
+  if(!verifGroupe)  { repondre('Cette commande n\' est possible que dans les groupes ')} ;
+  if (verifAdmin || superUser) { 
+
+  let metadata = await zk.groupMetadata(dest) ;
+
+  //console.log(metadata.participants)
+ let tag = [] ;
+  for (const participant of metadata.participants ) {
+
+      tag.push(participant.id) ;
+  }
+  //console.log(tag)
+
+    if(msgRepondu) {
+      console.log(msgRepondu)
+      let msg ;
+
+      if (msgRepondu.imageMessage) {
+
+        
+
+     let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.imageMessage) ;
+     // console.log(msgRepondu) ;
+     msg = {
+
+       image : { url : media } ,
+       caption : msgRepondu.imageMessage.caption,
+       mentions :  tag
+       
+     }
+    
+
+      } else if (msgRepondu.videoMessage) {
+
+        let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.videoMessage) ;
+
+        msg = {
+
+          video : { url : media } ,
+          caption : msgRepondu.videoMessage.caption,
+          mentions :  tag
+          
+        }
+
+      } else if (msgRepondu.audioMessage) {
+    
+        let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.audioMessage) ;
+       
+        msg = {
+   
+          audio : { url : media } ,
+          mimetype:'audio/mp4',
+          mentions :  tag
+           }     
+        
+      } else if (msgRepondu.stickerMessage) {
+
+    
+        let media  = await zk.downloadAndSaveMediaMessage(msgRepondu.stickerMessage)
+
+        let stickerMess = new Sticker(media, {
+          pack: 'Zokou-tag',
+          type: StickerTypes.CROPPED,
+          categories: ["🤩", "🎉"],
+          id: "12345",
+          quality: 70,
+          background: "transparent",
+        });
+        const stickerBuffer2 = await stickerMess.toBuffer();
+       
+        msg = { sticker: stickerBuffer2 , mentions : tag}
+
+
+      }  else {
+          msg = {
+             text : msgRepondu.conversation,
+             mentions : tag
+          }
+      }
+
+    zk.sendMessage(dest,msg)
+
+    } else {
+
+        if(!arg || !arg[0]) { repondre('Entrez le texte a annoncer ou mentionner le message a annoncer') ; return} ;
+
+      zk.sendMessage(
+         dest,
+         {
+          text : arg.join(' ') ,
+          mentions : tag
+         }     
+      )
+    }
+
+} else {
+  repondre('Commande reservée au admins')
+}
+})
